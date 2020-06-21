@@ -5,5 +5,5 @@ import androidx.lifecycle.ViewModel
 
 class OrderDetailViewModel : ViewModel() {
     val fcmRegistrationId = MutableLiveData<String>()
-    val product = MutableLiveData<OrderDetail>()
+    val orderDetail = MutableLiveData<OrderDetail>()
 }

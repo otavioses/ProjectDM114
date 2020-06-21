@@ -1,4 +1,4 @@
-package br.com.osouza.projectdm114.order
+package br.com.osouza.projectdm114.eventlist
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.com.osouza.projectdm114.databinding.FragmentOrderDetailBinding
+import br.com.osouza.projectdm114.order.OrderDetail
+import br.com.osouza.projectdm114.order.OrderDetailViewModel
 import com.google.firebase.iid.FirebaseInstanceId
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 
-class OrderDetailFragment : Fragment() {
+class EventListFragment : Fragment() {
     private val orderDetailViewModel: OrderDetailViewModel by lazy {
         ViewModelProvider(this).get(OrderDetailViewModel::class.java)
     }
