@@ -10,7 +10,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import br.com.osouza.projectdm114.MainActivity
 import br.com.osouza.projectdm114.R
-import br.com.osouza.projectdm114.order.Order
+import br.com.osouza.projectdm114.order.OrderDetail
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -30,8 +30,8 @@ class FCMService : FirebaseMessagingService() {
 
             if (remoteMessage.data.containsKey("orderDetail")) {
                 val moshi = Moshi.Builder().build()
-                val jsonAdapter: JsonAdapter<Order> =
-                    moshi.adapter<Order>(Order::class.java)
+                val jsonAdapter: JsonAdapter<OrderDetail> =
+                    moshi.adapter<OrderDetail>(OrderDetail::class.java)
                 jsonAdapter.fromJson(remoteMessage.data["orderDetail"]!!).let {
                     val user = FirebaseAuth.getInstance().currentUser
                     if (user != null && it != null) {

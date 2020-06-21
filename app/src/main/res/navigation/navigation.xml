@@ -18,8 +18,8 @@
 
     <fragment
         android:id="@+id/fragmentOrder"
-        android:name="br.com.osouza.projectdm114.order.OrderFragment"
+        android:name="br.com.osouza.projectdm114.order.OrderDetailFragment"
         android:label="fragment_order"
-        tools:layout="@layout/fragment_order" >
+        tools:layout="@layout/fragment_order_detail" >
     </fragment>
 </navigation>

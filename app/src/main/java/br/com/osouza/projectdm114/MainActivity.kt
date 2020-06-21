@@ -10,7 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.findNavController
-import br.com.osouza.projectdm114.order.OrderFragmentDirections
+import br.com.osouza.projectdm114.order.OrderDetailFragmentDirections
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.FirebaseApp
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showOrderDetail(orderId: String) {
         this.findNavController(R.id.nav_host_fragment)
-            .navigate(OrderFragmentDirections.actionShowOrderInfo(orderId))
+            .navigate(OrderDetailFragmentDirections.actionShowOrderInfo(orderId))
     }
 
     fun pushRegister() {

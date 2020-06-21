@@ -7,43 +7,43 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import br.com.osouza.projectdm114.databinding.FragmentOrderBinding
+import br.com.osouza.projectdm114.databinding.FragmentOrderDetailBinding
 import com.google.firebase.iid.FirebaseInstanceId
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 
-class OrderFragment : Fragment() {
-    private val orderViewModel: OrderViewModel by lazy {
-        ViewModelProvider(this).get(OrderViewModel::class.java)
+class OrderDetailFragment : Fragment() {
+    private val orderDetailViewModel: OrderDetailViewModel by lazy {
+        ViewModelProvider(this).get(OrderDetailViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentOrderBinding.inflate(inflater)
+        val binding = FragmentOrderDetailBinding.inflate(inflater)
         binding.setLifecycleOwner(this)
-        binding.orderViewModel = orderViewModel
+        binding.orderDetailViewModel = orderDetailViewModel
         //Add the rest of the code here
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    orderViewModel.fcmRegistrationId.value = task.result?.token
+                    orderDetailViewModel.fcmRegistrationId.value = task.result?.token
                     Log.i("ProductInfoFragment", "FCM Token: ${task.result?.token}")
                     if (this.arguments != null) {
                         if (this.requireArguments().containsKey("productInfo")) {
                             val moshi = Moshi.Builder().build()
-                            val jsonAdapter: JsonAdapter<Order> =
-                                moshi.adapter<Order>(Order::class.java)
-                            jsonAdapter.fromJson(this.requireArguments().getString("productInfo")!!).let {
-                                orderViewModel.product.value = it
-                            }
+                            val jsonAdapter: JsonAdapter<OrderDetail> =
+                                moshi.adapter<OrderDetail>(OrderDetail::class.java)
+                            jsonAdapter.fromJson(this.requireArguments().getString("productInfo")!!)
+                                .let {
+                                    orderDetailViewModel.product.value = it
+                                }
                         }
                     }
                 }
             }
-
-
+        
         return binding.root
     }
 }

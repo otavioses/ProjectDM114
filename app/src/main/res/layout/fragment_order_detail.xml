@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="orderViewModel"
-            type="br.com.osouza.projectdm114.order.OrderViewModel" />
+            name="orderDetailViewModel"
+            type="br.com.osouza.projectdm114.order.OrderDetailViewModel" />
     </data>
 
     <ScrollView
@@ -36,7 +36,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{orderViewModel.product.username}"
+                android:text="@{orderDetailViewModel.product.username}"
                 android:textIsSelectable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:orderId="@{orderViewModel.product.orderId}"
+                app:orderId="@{orderDetailViewModel.product.orderId}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -85,7 +85,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{orderViewModel.product.status}"
+                android:text="@{orderDetailViewModel.product.status}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -109,7 +109,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{orderViewModel.product.productCode}"
+                android:text="@{orderDetailViewModel.product.productCode}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
