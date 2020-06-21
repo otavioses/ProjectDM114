@@ -6,4 +6,11 @@
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="Sign out"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nav_event_list"
+        android:icon="@drawable/ic_list_menu_24"
+        android:title="Event List"
+        app:showAsAction="always" />
+
 </menu>

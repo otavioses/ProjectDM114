@@ -56,6 +56,12 @@ class MainActivity : AppCompatActivity() {
             .navigate(OrderDetailFragmentDirections.actionShowOrderInfo(orderId))
     }
 
+    private fun showEventList() {
+        this.findNavController(R.id.nav_host_fragment)
+            .navigate(OrderDetailFragmentDirections.actionShowEventList())
+    }
+
+
     fun pushRegister() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
@@ -103,6 +109,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 true
             }
+            R.id.nav_event_list -> {
+                showEventList()
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

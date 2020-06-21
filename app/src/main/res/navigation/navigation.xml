@@ -21,5 +21,16 @@
         android:name="br.com.osouza.projectdm114.order.OrderDetailFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order_detail" >
+        <action
+            android:id="@+id/action_showEventList"
+            app:destination="@id/fragmentEventList" >
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentEventList"
+        android:name="br.com.osouza.projectdm114.event.EventListFragment"
+        android:label="fragment_event_list"
+        tools:layout="@layout/fragment_event_list">
     </fragment>
 </navigation>
