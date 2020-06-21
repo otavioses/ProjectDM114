@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/fragmentOrder">
+    <!--Add new actions here -->
+
+    <action
+        android:id="@+id/action_showOrderInfo"
+        app:launchSingleTop="true"
+        app:destination="@id/fragmentOrder" >
+        <argument
+            app:nullable="true"
+            android:name="productInfo"
+            app:argType="string"/>
+    </action>
+
+    <fragment
+        android:id="@+id/fragmentOrder"
+        android:name="br.com.osouza.projectdm114.order.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" >
+    </fragment>
+</navigation>
