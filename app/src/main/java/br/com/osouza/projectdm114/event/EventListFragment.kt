@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.osouza.projectdm114.databinding.FragmentEventListBinding
-import br.com.osouza.projectdm114.databinding.FragmentOrderDetailBinding
 
 class EventListFragment : Fragment() {
 //    private val orderDetailViewModel: OrderDetailViewModel by lazy {
