@@ -8,7 +8,7 @@ import java.util.*
 class OrderEvent(
     @Exclude var id: String? = null,
     var userId: String? = null,
-    var orderId: String? = null,
+    var orderId: Long? = null,
     var date: Date? = null,
     var status: String? = null
 )

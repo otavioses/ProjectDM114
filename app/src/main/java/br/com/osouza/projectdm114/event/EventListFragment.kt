@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import br.com.osouza.projectdm114.databinding.FragmentEventListBinding
 
 class EventListFragment : Fragment() {
-//    private val orderDetailViewModel: OrderDetailViewModel by lazy {
-//        ViewModelProvider(this).get(OrderDetailViewModel::class.java)
-//    }
+    private val eventListViewModel: EventListViewModel by lazy {
+        ViewModelProvider(this).get(EventListViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,26 +21,19 @@ class EventListFragment : Fragment() {
     ): View? {
         val binding = FragmentEventListBinding.inflate(inflater)
         binding.setLifecycleOwner(this)
-//        binding.orderDetailViewModel = orderDetailViewModel
-//        //Add the rest of the code here
-//        FirebaseInstanceId.getInstance().instanceId
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    orderDetailViewModel.fcmRegistrationId.value = task.result?.token
-//                    Log.i("ProductInfoFragment", "FCM Token: ${task.result?.token}")
-//                    if (this.arguments != null) {
-//                        if (this.requireArguments().containsKey("productInfo")) {
-//                            val moshi = Moshi.Builder().build()
-//                            val jsonAdapter: JsonAdapter<OrderDetail> =
-//                                moshi.adapter<OrderDetail>(OrderDetail::class.java)
-//                            jsonAdapter.fromJson(this.requireArguments().getString("productInfo")!!)
-//                                .let {
-//                                    orderDetailViewModel.orderDetail.value = it
-//                                }
-//                        }
-//                    }
-//                }
-//            }
+        binding.eventListViewModel = eventListViewModel
+
+        val itemDecor = DividerItemDecoration(getContext(), RecyclerView.VERTICAL);
+        binding.rcvOrderEvents.addItemDecoration(itemDecor);
+
+        binding.rcvOrderEvents.adapter = OrderEventAdapter(OrderEventAdapter.OrderEventClickListener {
+
+        })
+
+        binding.orderEventRefresh.setOnRefreshListener {
+            eventListViewModel.refreshProducts()
+            binding.orderEventRefresh.isRefreshing = false
+        }
 
         return binding.root
     }

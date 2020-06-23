@@ -41,7 +41,7 @@ object OrderEventRepository {
         val liveProducts = MutableLiveData<List<OrderEvent>>()
         firebaseFirestore.collection(COLLECTION)
             .whereEqualTo(FIELD_USER_ID, firebaseAuth.uid)
-            .orderBy(FIELD_DATE, Query.Direction.ASCENDING)
+            .orderBy(FIELD_DATE, Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 if (firebaseFirestoreException != null) {
                     Log.w(TAG, "Listen failed.", firebaseFirestoreException)

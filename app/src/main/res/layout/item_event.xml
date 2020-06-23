@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="product"-->
-<!--            type="br.com.siecola.androidproject02.network.Product" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="orderEvent"
+            type="br.com.osouza.projectdm114.persistence.OrderEvent" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,8 +23,8 @@
             android:paddingTop="12dip"
             android:paddingBottom="12dip"
             android:layout_gravity="center"
+            app:orderId="@{orderEvent.orderId}"
 
-            android:textAlignment="viewStart"
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toStartOf="@+id/txtOrdertListItemStatus"
@@ -44,7 +44,7 @@
             android:paddingEnd="8dip"
             android:paddingBottom="12dip"
             android:layout_gravity="center"
-
+            android:text="@{orderEvent.status}"
             tools:text="Nota fiscal emitida"
             android:textAlignment="center"
             android:textSize="14sp"
@@ -64,7 +64,7 @@
             android:paddingEnd="8dip"
             android:paddingBottom="12dip"
             android:layout_gravity="center"
-
+            app:orderEventDate="@{orderEvent.date}"
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="normal"

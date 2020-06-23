@@ -10,7 +10,10 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import br.com.osouza.projectdm114.MainActivity
 import br.com.osouza.projectdm114.R
+import br.com.osouza.projectdm114.Utils.Util
 import br.com.osouza.projectdm114.order.OrderDetail
+import br.com.osouza.projectdm114.persistence.OrderEvent
+import br.com.osouza.projectdm114.persistence.OrderEventRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -36,7 +39,13 @@ class FCMService : FirebaseMessagingService() {
                     val user = FirebaseAuth.getInstance().currentUser
                     if (user != null && it != null) {
                         if (it.username == user.email)
-                            sendProductNotification(remoteMessage.data["orderDetail"]!!)
+                            OrderEventRepository.saveOrderEvent(OrderEvent(
+                                orderId = it.orderId,
+                                status = it.status,
+                                date = Util.getCurrentDate()
+                            ))
+
+                        sendProductNotification(remoteMessage.data["orderDetail"]!!)
                     }
                 }
 
