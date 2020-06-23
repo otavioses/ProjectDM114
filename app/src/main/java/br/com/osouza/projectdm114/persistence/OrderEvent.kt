@@ -10,5 +10,6 @@ class OrderEvent(
     var userId: String? = null,
     var orderId: Long? = null,
     var date: Date? = null,
-    var status: String? = null
+    var status: String? = null,
+    var productCode: String? = null
 )

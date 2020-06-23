@@ -42,7 +42,8 @@ class FCMService : FirebaseMessagingService() {
                             OrderEventRepository.saveOrderEvent(OrderEvent(
                                 orderId = it.orderId,
                                 status = it.status,
-                                date = Util.getCurrentDate()
+                                date = Util.getCurrentDate(),
+                                productCode = it.productCode
                             ))
 
                         sendProductNotification(remoteMessage.data["orderDetail"]!!)
