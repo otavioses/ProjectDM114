@@ -16,13 +16,13 @@ class OrderEventAdapter(val orderEventClickListener: OrderEventClickListener) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OrderEventAdapter.OrderEventViewHolder {
+    ): OrderEventViewHolder {
         firebaseAnalytics = FirebaseAnalytics.getInstance(parent.context)
         return OrderEventViewHolder(ItemEventBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
 
-    override fun onBindViewHolder(holder: OrderEventAdapter.OrderEventViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrderEventViewHolder, position: Int) {
         val orderEvent = getItem(position)
         holder.bind(orderEvent)
         holder.itemView.setOnClickListener {
