@@ -3,7 +3,9 @@ package br.com.osouza.projectdm114.eventdetail
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import br.com.osouza.projectdm114.R
 import br.com.osouza.projectdm114.databinding.FragmentEventDetailBinding
 import com.firebase.ui.auth.AuthUI
@@ -23,9 +25,21 @@ class EventDetailFragment : Fragment() {
             if (this.requireArguments().containsKey("orderEventId")) {
                 val orderEventId = this.requireArguments().getString("orderEventId")
                 val eventDetailViewModelFactory = EventDetailViewModelFactory(orderEventId)
-                binding.eventDetailViewModel = ViewModelProvider(
+                val eventDetailViewModel = ViewModelProvider(
                     this, eventDetailViewModelFactory
                 ).get(EventDetailViewModel::class.java)
+
+                binding.eventDetailViewModel = eventDetailViewModel
+                eventDetailViewModel.orderEvent.observe(
+                    viewLifecycleOwner,
+                    Observer { orderEvent ->
+                        orderEvent.productCode?.let {
+                            val productDetailViewModel = ViewModelProviders.of(
+                                this, ProductDetailViewModelFactory(it)
+                            ).get(ProductDetailViewModel::class.java)
+                            binding.productDetailViewModel = productDetailViewModel
+                        }
+                    })
             }
         }
 

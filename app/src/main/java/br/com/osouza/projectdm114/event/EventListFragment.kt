@@ -29,9 +29,10 @@ class EventListFragment : Fragment() {
         val itemDecor = DividerItemDecoration(getContext(), RecyclerView.VERTICAL);
         binding.rcvOrderEvents.addItemDecoration(itemDecor);
 
-        binding.rcvOrderEvents.adapter = OrderEventAdapter(OrderEventAdapter.OrderEventClickListener {
-            it.id?.let { it1 -> showEventDetail(it1) }
-        })
+        binding.rcvOrderEvents.adapter =
+            OrderEventAdapter(OrderEventAdapter.OrderEventClickListener {
+                it.id?.let { it1 -> showEventDetail(it1) }
+            })
 
         binding.orderEventRefresh.setOnRefreshListener {
             eventListViewModel.refreshProducts()

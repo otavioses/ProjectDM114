@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import br.com.osouza.projectdm114.persistence.OrderEvent
 import br.com.osouza.projectdm114.persistence.OrderEventRepository
 
-class EventDetailViewModel(private val orderEventId: String?) : ViewModel() {
+class EventDetailViewModel(orderEventId: String?) : ViewModel() {
     var orderEvent = MutableLiveData<OrderEvent>()
 
     init {
