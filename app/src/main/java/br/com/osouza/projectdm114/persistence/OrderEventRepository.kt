@@ -75,6 +75,7 @@ object OrderEventRepository {
                     val orderEvent = querySnapshot.toObject<OrderEvent>()
                     if (orderEvent != null) {
                         if (orderEvent.userId == firebaseAuth.uid) {
+                            orderEvent.id = querySnapshot.id
                             liveOrderEvent.postValue(orderEvent)
                         }
                     }
@@ -83,6 +84,11 @@ object OrderEventRepository {
                 }
             }
         return liveOrderEvent
+    }
+
+    fun deleteProduct(orderEventId: String) {
+        val document = firebaseFirestore.collection(COLLECTION).document(orderEventId)
+        document.delete()
     }
 
 }

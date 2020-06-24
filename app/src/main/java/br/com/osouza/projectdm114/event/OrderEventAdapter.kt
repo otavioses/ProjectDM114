@@ -26,15 +26,9 @@ class OrderEventAdapter(val orderEventClickListener: OrderEventClickListener) :
         val orderEvent = getItem(position)
         holder.bind(orderEvent)
         holder.itemView.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, orderEvent.code)
-//            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle)
             orderEventClickListener.onClick(orderEvent)
         }
         holder.itemView.setOnLongClickListener {
-//            val bundle = Bundle()
-//            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, orderEvent.code)
-//            firebaseAnalytics.logEvent("attempt_delete_product", bundle)
             true
         }
     }

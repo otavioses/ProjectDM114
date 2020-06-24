@@ -17,8 +17,22 @@ class EventDetailViewModel(orderEventId: String?) : ViewModel() {
         }
     }
 
-    fun getOrderEvent(orderId: String) {
-        orderEvent = OrderEventRepository.getOrderEventById(orderId)
+    fun getOrderEvent(orderEventId: String) {
+        orderEvent = OrderEventRepository.getOrderEventById(orderEventId)
+    }
+
+    fun deleteOrderEvent() {
+        orderEvent.value?.id?.let {
+            OrderEventRepository.deleteProduct(it)
+            orderEvent.value = null
+        }
+    }
+
+    override fun onCleared() {
+        if (orderEvent.value != null) {
+            OrderEventRepository.saveOrderEvent(orderEvent.value!!)
+        }
+        super.onCleared()
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.osouza.projectdm114.R
 import br.com.osouza.projectdm114.databinding.FragmentOrderDetailBinding
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.iid.FirebaseInstanceId
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -69,6 +70,10 @@ class OrderDetailFragment : Fragment() {
                 true
             }
             R.id.nav_event_list -> {
+                val firebaseAnalytics = this.context?.let { FirebaseAnalytics.getInstance(it) }
+                val bundle = Bundle()
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "")
+                firebaseAnalytics?.logEvent("show_list_items", bundle)
                 showEventList()
                 true
             }

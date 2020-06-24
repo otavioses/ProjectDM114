@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import br.com.osouza.projectdm114.R
 import br.com.osouza.projectdm114.databinding.FragmentEventListBinding
-import br.com.osouza.projectdm114.persistence.OrderEvent
 import com.firebase.ui.auth.AuthUI
 
 class EventListFragment : Fragment() {
@@ -40,6 +39,11 @@ class EventListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        eventListViewModel.refreshProducts()
+        super.onResume()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
