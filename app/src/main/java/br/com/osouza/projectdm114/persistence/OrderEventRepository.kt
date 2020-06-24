@@ -38,7 +38,7 @@ object OrderEventRepository {
     }
 
     fun getOrderEvents(): MutableLiveData<List<OrderEvent>> {
-        val liveProducts = MutableLiveData<List<OrderEvent>>()
+        val liveOrderEvents = MutableLiveData<List<OrderEvent>>()
         firebaseFirestore.collection(COLLECTION)
             .whereEqualTo(FIELD_USER_ID, firebaseAuth.uid)
             .orderBy(FIELD_DATE, Query.Direction.DESCENDING)
@@ -48,18 +48,41 @@ object OrderEventRepository {
                     return@addSnapshotListener
                 }
                 if (querySnapshot != null && !querySnapshot.isEmpty) {
-                    val products = ArrayList<OrderEvent>()
+                    val orderEvents = ArrayList<OrderEvent>()
                     querySnapshot.forEach {
-                        val product = it.toObject<OrderEvent>()
-                        product.id = it.id
-                        products.add(product)
+                        val orderEvent = it.toObject<OrderEvent>()
+                        orderEvent.id = it.id
+                        orderEvents.add(orderEvent)
                     }
-                    liveProducts.postValue(products)
+                    liveOrderEvents.postValue(orderEvents)
                 } else {
                     Log.d(TAG, "No product has been found")
                 }
             }
-        return liveProducts
+        return liveOrderEvents
+    }
+
+    fun getOrderEventById(orderEventId: String): MutableLiveData<OrderEvent> {
+        val liveOrderEvent: MutableLiveData<OrderEvent> = MutableLiveData()
+        firebaseFirestore.collection(COLLECTION)
+            .document(orderEventId)
+            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                if (firebaseFirestoreException != null) {
+                    Log.w(TAG, "Listen failed.", firebaseFirestoreException)
+                    return@addSnapshotListener
+                }
+                if (querySnapshot != null ) {
+                    val orderEvent = querySnapshot.toObject<OrderEvent>()
+                    if (orderEvent != null) {
+                        if (orderEvent.userId == firebaseAuth.uid) {
+                            liveOrderEvent.postValue(orderEvent)
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "No product has been found")
+                }
+            }
+        return liveOrderEvent
     }
 
 }

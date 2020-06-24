@@ -56,21 +56,6 @@ class MainActivity : AppCompatActivity() {
             .navigate(OrderDetailFragmentDirections.actionShowOrderInfo(orderId))
     }
 
-    private fun showEventList() {
-        this.findNavController(R.id.nav_host_fragment)
-            .navigate(OrderDetailFragmentDirections.actionShowEventList())
-    }
-
-
-    fun pushRegister() {
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.i("ProductInfoFragment", "FCM Token: ${task.result?.token}")
-                }
-            }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == AUTHENTICATION_REQUEST_CODE) {
@@ -86,35 +71,10 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                setContentView(R.layout.activity_main)
             } else {
                 Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.nav_sign_out -> {
-                AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener {
-                        this.recreate()
-                    }
-                true
-            }
-            R.id.nav_event_list -> {
-                showEventList()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

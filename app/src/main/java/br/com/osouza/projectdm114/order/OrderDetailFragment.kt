@@ -2,12 +2,13 @@ package br.com.osouza.projectdm114.order
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import br.com.osouza.projectdm114.R
 import br.com.osouza.projectdm114.databinding.FragmentOrderDetailBinding
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.iid.FirebaseInstanceId
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -24,7 +25,9 @@ class OrderDetailFragment : Fragment() {
         val binding = FragmentOrderDetailBinding.inflate(inflater)
         binding.setLifecycleOwner(this)
         binding.orderDetailViewModel = orderDetailViewModel
+        setHasOptionsMenu(true)
         //Add the rest of the code here
+
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -46,4 +49,38 @@ class OrderDetailFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.nav_sign_out -> {
+                this.context?.let {
+                    AuthUI.getInstance()
+                        .signOut(it)
+                        .addOnCompleteListener {
+                            this.activity?.recreate()
+                        }
+                }
+                true
+            }
+            R.id.nav_event_list -> {
+                showEventList()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showEventList() {
+        this.findNavController()
+            .navigate(OrderDetailFragmentDirections.actionShowEventList())
+    }
+
+
 }

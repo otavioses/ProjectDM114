@@ -3,7 +3,7 @@ package br.com.osouza.projectdm114.event
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.osouza.projectdm114.Utils.Util
+import br.com.osouza.projectdm114.util.Utils
 import br.com.osouza.projectdm114.persistence.OrderEvent
 import java.util.*
 
@@ -16,6 +16,6 @@ fun bindOrderEventsList(recyclerView: RecyclerView, orderEvents: List<OrderEvent
 @BindingAdapter("orderEventDate")
 fun bindOrderEventDate(txtProductPrice: TextView, date: Date?) {
     date?.let {
-        txtProductPrice.text = Util.getDateFormated(it)
+        txtProductPrice.text = Utils.getDateFormated(it)
     }
 }

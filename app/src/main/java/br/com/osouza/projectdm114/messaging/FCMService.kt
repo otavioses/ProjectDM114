@@ -10,7 +10,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import br.com.osouza.projectdm114.MainActivity
 import br.com.osouza.projectdm114.R
-import br.com.osouza.projectdm114.Utils.Util
+import br.com.osouza.projectdm114.util.Utils
 import br.com.osouza.projectdm114.order.OrderDetail
 import br.com.osouza.projectdm114.persistence.OrderEvent
 import br.com.osouza.projectdm114.persistence.OrderEventRepository
@@ -42,7 +42,7 @@ class FCMService : FirebaseMessagingService() {
                             OrderEventRepository.saveOrderEvent(OrderEvent(
                                 orderId = it.orderId,
                                 status = it.status,
-                                date = Util.getCurrentDate(),
+                                date = Utils.getCurrentDate(),
                                 productCode = it.productCode
                             ))
 
