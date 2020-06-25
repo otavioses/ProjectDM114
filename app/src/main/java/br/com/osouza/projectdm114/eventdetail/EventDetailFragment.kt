@@ -5,17 +5,19 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import br.com.osouza.projectdm114.R
 import br.com.osouza.projectdm114.databinding.FragmentEventDetailBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 
 class EventDetailFragment : Fragment() {
 
     lateinit var eventDetailViewModel: EventDetailViewModel
     var orderEventId: String? = null
+    var hasDeleteDetailMenu = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +25,8 @@ class EventDetailFragment : Fragment() {
     ): View? {
         val binding = FragmentEventDetailBinding.inflate(inflater)
         binding.setLifecycleOwner(this)
-
+        val remoteConfig = Firebase.remoteConfig
+        hasDeleteDetailMenu = remoteConfig.getBoolean("delete_detail_view")
         setHasOptionsMenu(true)
 
         if (this.arguments != null) {
@@ -61,9 +64,14 @@ class EventDetailFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
-        inflater.inflate(R.menu.event_details_menu, menu)
+        if (hasDeleteDetailMenu) {
+            inflater.inflate(R.menu.event_details_menu, menu)
+        } else {
+            inflater.inflate(R.menu.event_list_menu, menu)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
