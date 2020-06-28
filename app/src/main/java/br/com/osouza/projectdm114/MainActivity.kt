@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                         "Sign in!\nUser: $name \nEmail: $email",
                         Toast.LENGTH_SHORT
                     ).show()
+                    setContentView(R.layout.activity_main)
                 }
             } else {
                 Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()

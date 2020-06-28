@@ -38,15 +38,17 @@ class FCMService : FirebaseMessagingService() {
                 jsonAdapter.fromJson(remoteMessage.data["orderDetail"]!!).let {
                     val user = FirebaseAuth.getInstance().currentUser
                     if (user != null && it != null) {
-                        if (it.username == user.email)
-                            OrderEventRepository.saveOrderEvent(OrderEvent(
-                                orderId = it.orderId,
-                                status = it.status,
-                                date = Utils.getCurrentDate(),
-                                productCode = it.productCode
-                            ))
-
-                        sendProductNotification(remoteMessage.data["orderDetail"]!!)
+                        if (it.username == user.email) {
+                            OrderEventRepository.saveOrderEvent(
+                                OrderEvent(
+                                    orderId = it.orderId,
+                                    status = it.status,
+                                    date = Utils.getCurrentDate(),
+                                    productCode = it.productCode
+                                )
+                            )
+                            sendProductNotification(remoteMessage.data["orderDetail"]!!)
+                        }
                     }
                 }
 
